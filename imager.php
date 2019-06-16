@@ -19,7 +19,7 @@ $input = imagecreatefrompng("./input.png");
  * Open outputfile and write initial comment and start the image line.
  */
 $fp = fopen("output.sh", "w");
-fwrite($fp, "# terminal-imager by RundesBalli\n# see: https://github.com/RundesBalli/terminal-imager");
+fwrite($fp, "# terminal-imager by RundesBalli\n# see: https://github.com/RundesBalli/terminal-imager\n");
 fwrite($fp, "echo -e \"");
 /**
  * Go line by line, pixel by pixel and create RGB ANSI escape sequence.
