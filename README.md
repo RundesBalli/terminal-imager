@@ -6,7 +6,7 @@ Use a `.png` file, name it `input.png` and copy the file into the same directory
   
 1. Open terminal
 2. `php imager.php`
-3. The output is stored in output.sh
+3. The output is stored in `output.sh`
 4. You can test the output with `chmod +x output.sh && ./output.sh`
 
 ## Note
