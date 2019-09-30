@@ -2,10 +2,10 @@
 A PHP script which creates "terminal images" from an inputfile.
 
 ## Usage
-Use a `.png` file, name it `input.png` and copy the file into the same directory as the `imager.php`.  
+Supported file types: `.png`, `.jpg`, `.jpeg`.
   
 1. Open terminal
-2. `php imager.php`
+2. `php imager.php ./path/to/image.png`
 3. The output is stored in `output.sh`
 4. You can test the output with `chmod +x output.sh && ./output.sh`
 
