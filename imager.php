@@ -11,9 +11,26 @@
  */
 
 /**
+ * Parse command line args
+ */
+$type = isset($argv[1]) ? $argv[1] : NULL;
+if (!isset($type)){
+    echo("Specify image path as command line argument.\n\nExample: $argv[0] ./image.png\n");
+    exit(1);
+}
+
+$datatype = substr($type, strrpos($type, '.') + 1);
+
+/**
  * Read inputfile and create image resource.
  */
-$input = imagecreatefrompng("./input.png");
+$input = "";
+if (strtolower($datatype) === 'png') $input = imagecreatefrompng($type);
+else if (strtolower($datatype) === 'jpg' || strtolower($datatype) === 'jpeg') $input = imagecreatefromjpeg($type);
+else {
+    echo("Invalid file type.\n");
+    exit(1); 
+}
 
 /**
  * Open outputfile and write initial comment and start the image line.
@@ -27,11 +44,7 @@ fwrite($fp, "echo -e \"");
  */
 for($y = 0; $y < imagesy($input); $y++) {
   for($x = 0; $x < imagesx($input); $x++) {
-    if($x == 0) {
-      if($y != 0) {
-        fwrite($fp, "\"\necho -e \"");
-      }
-    }
+    if($x == 0 && $y != 0) fwrite($fp, "\"\necho -e \"");
     $color = imagecolorsforindex($input, imagecolorat($input, $x, $y));
     fwrite($fp, "\\e[48;2;".$color['red'].';'.$color['green'].';'.$color['blue']."m ");
   }
