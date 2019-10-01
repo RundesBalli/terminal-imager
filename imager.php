@@ -11,25 +11,22 @@
  */
 
 /**
- * Parse command line args
+ * Parse command line args, read inputfile and create image resource.
  */
-$type = isset($argv[1]) ? $argv[1] : NULL;
-if (!isset($type)){
-    echo("Specify image path as command line argument.\n\nExample: $argv[0] ./image.png\n");
-    exit(1);
-}
-
-$datatype = substr($type, strrpos($type, '.') + 1);
-
-/**
- * Read inputfile and create image resource.
- */
-$input = "";
-if (strtolower($datatype) === 'png') $input = imagecreatefrompng($type);
-else if (strtolower($datatype) === 'jpg' || strtolower($datatype) === 'jpeg') $input = imagecreatefromjpeg($type);
-else {
-    echo("Invalid file type.\n");
-    exit(1); 
+if(isset($argv[1]) AND !empty($argv[1])) {
+  if (!file_exists($argv[1])) {
+    die("\e[48;2;128;0;0m\e[38;2;255;255;255mError:\e[0m The file does not exist.\n");
+  }
+  $extension = strtolower(pathinfo($argv[1], PATHINFO_EXTENSION));
+  if($extension == 'png') {
+    $input = imagecreatefrompng($argv[1]);
+  } elseif($extension == 'jpg' OR $extension == 'jpeg') {
+    $input = imagecreatefromjpeg($argv[1]);
+  } else {
+    die("\e[48;2;128;0;0m\e[38;2;255;255;255mError:\e[0m Invalid file type.\n\e[48;2;0;128;0m\e[38;2;255;255;255mSupported file types are:\e[0m .png, .jpg, .jpeg\n");
+  }
+} else {
+  die("\e[48;2;128;0;0m\e[38;2;255;255;255mError:\e[0m You must specify an image path as command line argument.\n\e[48;2;0;128;0m\e[38;2;255;255;255mExample:\e[0m ".$argv[0]." ./image.png\n");
 }
 
 /**
@@ -44,7 +41,9 @@ fwrite($fp, "echo -e \"");
  */
 for($y = 0; $y < imagesy($input); $y++) {
   for($x = 0; $x < imagesx($input); $x++) {
-    if($x == 0 && $y != 0) fwrite($fp, "\"\necho -e \"");
+    if($x == 0 && $y != 0) {
+      fwrite($fp, "\"\necho -e \"");
+    }
     $color = imagecolorsforindex($input, imagecolorat($input, $x, $y));
     fwrite($fp, "\\e[48;2;".$color['red'].';'.$color['green'].';'.$color['blue']."m ");
   }
