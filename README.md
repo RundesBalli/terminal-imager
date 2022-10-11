@@ -13,8 +13,8 @@ Supported file types: `.png`, `.jpg`, `.jpeg`.
 Most terminals are 80 to 130 columns wide and 25 to 40 rows in height. So it's recommended to use pictures within this dimensions.
 
 ## Screenshots
-RundesBalli logo:  
-![RundesBalli logo](https://raw.githubusercontent.com/RundesBalli/terminal-imager/master/screenshots/1.png)  
+Captcha:  
+![Captcha](https://raw.githubusercontent.com/RundesBalli/terminal-imager/master/screenshots/1.png)  
   
 Integrated circuit ([from wikipedia](https://en.wikipedia.org/wiki/File:Integrated_Circuit.jpg)):  
 ![integrated circuit](https://raw.githubusercontent.com/RundesBalli/terminal-imager/master/screenshots/2.png)
